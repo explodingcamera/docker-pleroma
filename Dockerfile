@@ -1,13 +1,14 @@
 FROM elixir:1.14-alpine as builder
 
 ARG PLEROMA_VERSION=stable
+ARG PLEROMA_REPO=https://git.pleroma.social/pleroma/pleroma.git
 ENV MIX_ENV=prod
 
 # Install build dependencies
 RUN apk add --no-cache git gcc g++ musl-dev make cmake file-dev ncurses postgresql-client imagemagick libmagic ffmpeg exiftool
 
 WORKDIR /app
-RUN git clone --filter=blob:none --no-checkout https://git.pleroma.social/pleroma/pleroma.git . \
+RUN git clone --filter=blob:none --no-checkout ${PLEROMA_REPO} . \
   && git checkout ${PLEROMA_VERSION}
 
 
@@ -19,9 +20,10 @@ RUN echo "import Mix.Config" > config/prod.secret.exs \
 
 FROM elixir:1.14-alpine as runner
 ENV MIX_ENV=prod
+ARG EXTRA_PKGS="imagemagick libmagic ffmpeg"
 
 # Install runtime dependencies
-RUN apk add --no-cache shadow su-exec git postgresql-client imagemagick libmagic ffmpeg exiftool
+RUN apk add --no-cache shadow su-exec git postgresql-client exiftool ${EXTRA_PKGS}
 WORKDIR /app
 
 ADD start.sh /app/start.sh

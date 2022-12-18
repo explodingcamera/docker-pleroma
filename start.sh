@@ -19,10 +19,8 @@ User gid:    $(id -g pleroma)
 -------------------------------------
 "
 
-chown pleroma:pleroma /app
-chown pleroma:pleroma /data
-
-
+chown -R pleroma:pleroma /app
+chown -R pleroma:pleroma /data
 
 echo "-- Waiting for database..."
 while ! pg_isready -U ${DB_USER:-pleroma} -d postgres://${DB_HOST:-db}:${DB_PORT:-5432}/${DB_NAME:-pleroma} -t 1; do

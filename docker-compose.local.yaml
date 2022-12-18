@@ -25,6 +25,10 @@ services:
     restart: always
     ports:
       - '4000:4000'
+    build:
+      context: .
+      args:
+        - "PLEROMA_VER=stable"
     volumes:
       - ./data/uploads:/data/uploads
       - ./data/static:/data/static
