@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: explodingcamera/pleroma
+          images: ghcr.io/explodingcamera/pleroma
 
       - name: Build and push
         uses: docker/build-push-action@v3
@@ -38,5 +38,5 @@ jobs:
             PLEROMA_VERSION=${{ matrix.version }}
           context: .
           file: ./Dockerfile
-          tags: explodingcamera/pleroma:${{ matrix.version }}
+          tags: ghcr.io/explodingcamera/pleroma:${{ matrix.version }}
           labels: ${{ steps.meta.outputs.labels }}

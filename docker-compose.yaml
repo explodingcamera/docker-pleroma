@@ -14,7 +14,7 @@ services:
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
   web:
-    image: pleroma
+    image: ghcr.io/explodingcamera/pleroma:stable
     container_name: pleroma_web
     healthcheck:
       test:
@@ -27,13 +27,12 @@ services:
       - '4000:4000'
     build:
       context: .
-      # args:
-        # - "PLEROMA_VER=v2.4.2"
-        # - "PLEROMA_VER=stable"
+      args:
+        - "PLEROMA_VER=stable"
     volumes:
       - ./data/uploads:/data/uploads
       - ./data/static:/data/static
-      # - ./data/config.exs:/data/config.exs:ro
+      - ./data/config.exs:/data/config.exs:ro
     environment:
       PUID: 1000
       PGID: 1000
