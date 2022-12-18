@@ -77,6 +77,38 @@ docker run -d \
   ghcr.io/explodingcamera/pleroma:stable
 ```
 
+# Running Commands
+
+```bash
+$ docker exec -it pleroma_web ./cli.sh user new <username> <your@emailaddress> --admin
+```
+
+# Configuration
+
+## Environment variables
+
+- `PUID` - User ID (default: `1000`)
+- `PGID` - Group ID (default: `1000`)
+- `DOMAIN` - Domain name (default: `example.com`)
+
+## Pleroma configuration
+
+See [Pleroma documentation](https://docs.pleroma.social/backend/configuration/auth/) for more information.
+
+`custom-config.exs`
+
+```elixir
+import Config
+
+config :pleroma, :instance,
+  registrations_open: false
+
+config :pleroma, Pleroma.Web.Endpoint,
+  url: [host: "pleroma.example.org"]
+
+config :pleroma, Pleroma.Web.WebFinger, domain: "example.org"
+```
+
 # Build-time variables
 
 - `PLEROMA_VERSION` - Pleroma version to build (default: `stable`)

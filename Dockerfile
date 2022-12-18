@@ -27,7 +27,9 @@ RUN apk add --no-cache shadow su-exec git postgresql-client exiftool ${EXTRA_PKG
 WORKDIR /app
 
 ADD start.sh /app/start.sh
+ADD cli.sh /app/cli.sh
 RUN  chmod +x /app/start.sh \
+  && chmod +x /app/cli.sh \
   && groupmod -g 1000 users \
   && useradd -u 1000 -U -d /home/pleroma -s /bin/false pleroma \
   && usermod -G users pleroma \
