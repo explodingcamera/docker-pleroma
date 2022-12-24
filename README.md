@@ -1,4 +1,4 @@
-# Pleroma Docker
+# Pleroma Docker &nbsp; [![](https://ghcr-badge.deta.dev/explodingcamera/pleroma/size?tag=stable)](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma/59455876?tag=stable)
 
 # Supported tags
 
