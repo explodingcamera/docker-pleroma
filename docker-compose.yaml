@@ -28,7 +28,7 @@ services:
     volumes:
       - ./data/uploads:/data/uploads
       - ./data/static:/data/static
-      - ./custom-config.exs:/data/config.exs:ro
+      - ./custom-config.exs:/data/config.exs
     environment:
       PUID: 1000
       PGID: 1000

@@ -1,10 +1,14 @@
 # Pleroma Docker &nbsp; [![](https://ghcr-badge.deta.dev/explodingcamera/pleroma/size?tag=stable)](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma/59455876?tag=stable)
 
+Simple Docker image for [Pleroma](https://pleroma.social/).
+Currently, only x86_64 is supported. If you want to run Pleroma on other architectures, you should be able to build it yourself using the Dockerfile.
+Since there were no prebuild images for pleroma, I decided to create one myself for usage on [social.dawdle.space](https://social.dawdle.space/).
+
 # Supported tags
 
 - `stable` - latest stable release
 - `develop` - latest develop branch
-- `v2.4.5` - specific release (only the latest one is supported)
+- `v2.5.0` - specific release (only the latest one is supported)
 
 # How to use this image
 
@@ -40,7 +44,7 @@ services:
     volumes:
       - ./data/uploads:/data/uploads
       - ./data/static:/data/static
-      - ./custom-config.exs:/data/config.exs:ro # optional
+      - ./custom-config.exs:/data/config.exs # optional
     environment:
       PUID: 1000
       PGID: 1000

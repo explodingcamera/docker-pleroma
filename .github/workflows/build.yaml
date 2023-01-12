@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        version: ["stable", "develop", "v2.4.5"]
+        version: ["stable", "develop", "v2.5.0"]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
