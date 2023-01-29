@@ -1,4 +1,4 @@
-# Pleroma Docker &nbsp; [![](https://ghcr-badge.deta.dev/explodingcamera/pleroma/size?tag=stable)](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma/59455876?tag=stable)
+# Pleroma Docker
 
 Simple Docker image for [Pleroma](https://pleroma.social/).
 Currently, only x86_64 is supported. If you want to run Pleroma on other architectures, you should be able to build it yourself using the Dockerfile.
