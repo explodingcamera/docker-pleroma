@@ -8,7 +8,7 @@ Since there were no prebuild images for pleroma, I decided to create one myself 
 
 - `stable` - latest stable release
 - `develop` - latest develop branch
-- `v2.5.0` - specific release (only the latest one is supported)
+- `v2.5.1` - specific release (only the latest one is supported)
 
 Specific versions might lag behind, but are always tested. Stable and develop are built automatically once a week and might break on breaking changes to pleroma.
 
