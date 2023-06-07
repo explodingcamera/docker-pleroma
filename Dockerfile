@@ -1,4 +1,4 @@
-FROM elixir:1.14-alpine as builder
+FROM elixir:1.14-otp-25-alpine as builder
 
 ARG PLEROMA_VERSION=stable
 ARG PLEROMA_REPO=https://git.pleroma.social/pleroma/pleroma.git
@@ -18,7 +18,7 @@ RUN echo "import Mix.Config" > config/prod.secret.exs \
   && mix deps.get --only prod \
   && mix deps.compile
 
-FROM elixir:1.14-alpine as runner
+FROM elixir:1.14-otp-25-alpine as runner
 ENV MIX_ENV=prod
 ARG EXTRA_PKGS="imagemagick libmagic ffmpeg"
 
