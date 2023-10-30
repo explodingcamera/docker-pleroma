@@ -44,9 +44,9 @@ jobs:
           tag_major=$(echo $tag | cut -d. -f1)
           tag_major_minor=$(echo $tag | cut -d. -f1-2)
           echo "Tag value is $tag"
-          echo "tag=$tag" >> $GITHUB_ENV
-          echo "tag_major=$tag_major" >> $GITHUB_ENV
-          echo "tag_major_minor=$tag_major_minor" >> $GITHUB_ENV
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          echo "tag_major=$tag_major" >> $GITHUB_OUTPUT
+          echo "tag_major_minor=$tag_major_minor" >> $GITHUB_OUTPUT
 
       - name: Docker meta
         id: meta
