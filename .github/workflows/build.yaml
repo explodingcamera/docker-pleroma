@@ -40,7 +40,7 @@ jobs:
         id: tag
         run: |
           tag=$(curl -s https://git.pleroma.social/api/v4/projects/2/repository/tags | jq -r '.[0].name')
-          echo "{tag: $tag}" >> $GITHUB_OUTPUT
+          echo "{"tag": "$tag"}" >> $GITHUB_OUTPUT
 
       - name: Docker meta
         id: meta
