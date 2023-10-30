@@ -47,10 +47,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ghcr.io/explodingcamera/pleroma
-          tags: |
-            ${{ matrix.version }}${{ startsWith(matrix.version, 'stable') && '\nlatest\n' || '' }}${{ startsWith(matrix.version, 'stable') && steps.tag.outputs.tag || '' }}
 
-      - name: Build and push
+      - name: Build and push (develop)
+        if: startsWith(matrix.version, 'develop')
         uses: docker/build-push-action@v3
         with:
           push: true
@@ -58,5 +57,19 @@ jobs:
             PLEROMA_VERSION=${{ matrix.version }}
           context: .
           file: ./Dockerfile
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ghcr.io/explodingcamera/pleroma:develop
+
+      - name: Build and push (stable)
+        if: startsWith(matrix.version, 'stable')
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          build-args: |
+            PLEROMA_VERSION=${{ matrix.version }}
+          context: .
+          file: ./Dockerfile
+          tags: |
+            ghcr.io/explodingcamera/pleroma:lastest
+            ghcr.io/explodingcamera/pleroma:${{ steps.tag.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
