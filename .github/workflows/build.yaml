@@ -40,7 +40,13 @@ jobs:
         id: tag
         run: |
           tag=$(curl -s https://git.pleroma.social/api/v4/projects/2/repository/tags | jq -r '.[0].name')
+          tag=$(echo $tag | sed 's/v//')
+          tag_major=$(echo $tag | cut -d. -f1)
+          tag_major_minor=$(echo $tag | cut -d. -f1-2)
+          echo "Tag value is $tag"
           echo "tag=$tag" >> $GITHUB_ENV
+          echo "tag_major=$tag_major" >> $GITHUB_ENV
+          echo "tag_major_minor=$tag_major_minor" >> $GITHUB_ENV
 
       - name: Docker meta
         id: meta
@@ -70,6 +76,8 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: |
-            ghcr.io/explodingcamera/pleroma:lastest
+            ghcr.io/explodingcamera/pleroma:latest
             ghcr.io/explodingcamera/pleroma:${{ steps.tag.outputs.tag }}
+            ghcr.io/explodingcamera/pleroma:${{ steps.tag.outputs.tag_major }}
+            ghcr.io/explodingcamera/pleroma:${{ steps.tag.outputs.tag_major_minor }}
           labels: ${{ steps.meta.outputs.labels }}
