@@ -42,12 +42,13 @@ jobs:
           tag=$(curl -s https://git.pleroma.social/api/v4/projects/2/repository/tags | jq -r '.[0].name')
           echo "tag=$tag" >> $GITHUB_ENV
 
-      - name: Docker meta (develop)
+      - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: ghcr.io/explodingcamera/pleroma
-          tags: ${{ matrix.version }}${{ startsWith(matrix.version, 'stable') && ' latest ' || '' }}${{ startsWith(matrix.version, 'stable') && steps.tag.outputs.tag || '' }}
+          tags: |
+            ${{ matrix.version }}${{ startsWith(matrix.version, 'stable') && '\nlatest\n' || '' }}${{ startsWith(matrix.version, 'stable') && steps.tag.outputs.tag || '' }}
 
       - name: Build and push
         uses: docker/build-push-action@v3
