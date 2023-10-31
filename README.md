@@ -6,11 +6,13 @@ Since there were no prebuild images for pleroma, I decided to create one myself 
 
 # Supported tags
 
-- `latest` - latest stable release
-- `2.5.5` - specific release (only the latest release is automatically updated)
-- `develop` - latest develop branch
+- [`latest`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest stable release
+- [`2`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest 2.x release
+- [`2.5`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific minor version
+- [`2.5.0`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific version
+- [`develop`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest develop branch build
 
-Specific versions might lag behind, but are always tested. Stable and develop are built automatically once a week and might break on breaking changes to pleroma.
+Versions are build automatically using GitHub Actions weekly.
 
 # How to use this image
 
