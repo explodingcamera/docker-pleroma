@@ -1,15 +1,14 @@
 # Pleroma Docker
 
 Simple Docker image for [Pleroma](https://pleroma.social/).
-Currently, only x86_64 is supported. If you want to run Pleroma on other architectures, you should be able to build it yourself using the Dockerfile.
-Since there were no prebuild images for pleroma, I decided to create one myself for usage on [social.dawdle.space](https://social.dawdle.space/).
+Currently, only x86_64 is supported. If you want to run Pleroma on other architectures, you should be able to build it yourself using the Dockerfile. I don't run a Pleroma instance myself anymore so there might be some issues with the image whenever a new pleroma version is released.
 
 # Supported tags
 
 - [`latest`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest stable release
-- [`2`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest 2.x release
-- [`2.5`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific minor version
-- [`2.5.0`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific version
+- [`3`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest 3.x release
+- [`3.15`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific minor version
+- [`3.15.1`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - specific version
 - [`develop`](https://github.com/explodingcamera/docker-pleroma/pkgs/container/pleroma) - latest develop branch build
 
 Versions are build automatically using GitHub Actions weekly.
@@ -25,7 +24,7 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:12.1-alpine
+    image: postgres:17-alpine
     container_name: pleroma_db
     restart: always
     healthcheck:
@@ -48,7 +47,7 @@ services:
     volumes:
       - ./data/uploads:/data/uploads
       - ./data/static:/data/static
-      - ./custom-config.exs:/data/config.exs # optional
+      - ./custom-config.exs:/data/config.exs
     environment:
       PUID: 1000
       PGID: 1000

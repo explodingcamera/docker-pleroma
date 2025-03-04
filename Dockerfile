@@ -1,4 +1,4 @@
-FROM elixir:1.14-otp-25-alpine as builder
+FROM docker.io/elixir:1.16-otp-26-alpine as builder
 
 ARG PLEROMA_VERSION=stable
 ARG PLEROMA_REPO=https://git.pleroma.social/pleroma/pleroma.git
@@ -9,16 +9,16 @@ RUN apk add --no-cache git gcc g++ musl-dev make cmake file-dev ncurses postgres
 
 WORKDIR /app
 RUN git clone --filter=blob:none --no-checkout ${PLEROMA_REPO} . \
-  && git checkout ${PLEROMA_VERSION}
+    && git checkout ${PLEROMA_VERSION}
 
 
 RUN echo "import Mix.Config" > config/prod.secret.exs \
-  && mix local.hex --force \
-  && mix local.rebar --force \
-  && mix deps.get --only prod \
-  && mix deps.compile
+    && mix local.hex --force \
+    && mix local.rebar --force \
+    && mix deps.get --only prod \
+    && mix deps.compile
 
-FROM elixir:1.14-otp-25-alpine as runner
+FROM docker.io/elixir:1.16-otp-26-alpine as runner
 ENV MIX_ENV=prod
 ARG EXTRA_PKGS="imagemagick libmagic ffmpeg"
 
@@ -29,12 +29,12 @@ WORKDIR /app
 ADD start.sh /app/start.sh
 ADD cli.sh /app/cli.sh
 RUN  chmod +x /app/start.sh \
-  && chmod +x /app/cli.sh \
-  && groupmod -g 1000 users \
-  && useradd -u 1000 -U -d /home/pleroma -s /bin/false pleroma \
-  && usermod -G users pleroma \
-  && mkdir -p \ /data/uploads /data/static \
-  && chown -R pleroma:users /data
+    && chmod +x /app/cli.sh \
+    && groupmod -g 1000 users \
+    && useradd -u 1000 -U -d /home/pleroma -s /bin/false pleroma \
+    && usermod -G users pleroma \
+    && mkdir -p \ /data/uploads /data/static \
+    && chown -R pleroma:users /data
 
 COPY --from=builder --chown=pleroma /root/.mix /home/pleroma/.mix
 COPY --from=builder --chown=pleroma /app .
